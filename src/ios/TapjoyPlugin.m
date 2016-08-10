@@ -277,7 +277,7 @@
 	
 	NSLog(@"tap points callback ID: %@", self.tapPointsCallbackID);
 	
-	[self writeJavascript:[pluginResult toSuccessCallbackString:self.tapPointsCallbackID]];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.tapPointsCallbackID];
 }
 
 
@@ -287,10 +287,10 @@
 	
 	NSString *stringToReturn = @"Get Tap Points Failed";
 	
-	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK 
+	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
 																	  messageAsString:stringToReturn];
 	
-	[self writeJavascript:[pluginResult toErrorCallbackString:self.tapPointsCallbackID]];
+	[self.commandDelegate sendPluginResult:pluginResult callbackId:self.tapPointsCallbackID];
 }
 
 
@@ -305,7 +305,7 @@
 	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK 
 																	  messageAsString:stringToReturn];
 	
-	[self writeJavascript:[pluginResult toSuccessCallbackString:self.spendTapPointsCallbackID]];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.spendTapPointsCallbackID];
 }
 
 
@@ -318,7 +318,7 @@
 	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK 
 																	  messageAsString:stringToReturn];
 	
-	[self writeJavascript:[pluginResult toErrorCallbackString:self.spendTapPointsCallbackID]];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.spendTapPointsCallbackID];
 }
 
 
@@ -333,7 +333,7 @@
 	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK 
 																	  messageAsString:stringToReturn];
 	
-	[self writeJavascript:[pluginResult toSuccessCallbackString:self.awardTapPointsCallbackID]];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.awardTapPointsCallbackID];
 }
 
 
@@ -346,7 +346,7 @@
 	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK 
 																	  messageAsString:stringToReturn];
 	
-	[self writeJavascript:[pluginResult toErrorCallbackString:self.awardTapPointsCallbackID]];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.awardTapPointsCallbackID];
 }
 
 
@@ -357,7 +357,7 @@
 	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                                       messageAsString:stringToReturn];
 	
-	[self writeJavascript:[pluginResult toSuccessCallbackString:self.fullScreenAdCallbackID]];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.fullScreenAdCallbackID];
 }
 
 - (void)getFullScreenAdError:(NSNotification*)notifyObj
@@ -367,7 +367,7 @@
 	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                                       messageAsString:stringToReturn];
 	
-	[self writeJavascript:[pluginResult toErrorCallbackString:self.fullScreenAdCallbackID]];
+	[self.commandDelegate sendPluginResult:pluginResult callbackId:self.fullScreenAdCallbackID];
 }
      
 - (void)showOffersError:(NSNotification*)notifyObj
@@ -377,7 +377,7 @@
 	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                                       messageAsString:stringToReturn];
 	
-	[self writeJavascript:[pluginResult toErrorCallbackString:self.offersCallbackID]];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.offersCallbackID];
 }
 
 - (void)tjcConnectSuccess:(NSNotification*)notifyObj
@@ -389,7 +389,7 @@
 	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK 
 																	  messageAsString:stringToReturn];
 	
-	[self writeJavascript:[pluginResult toSuccessCallbackString:self.connectCallbackID]];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.connectCallbackID];
 }
 
 
@@ -402,7 +402,7 @@
 	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK 
 																	  messageAsString:stringToReturn];
 	
-	[self writeJavascript:[pluginResult toErrorCallbackString:self.connectCallbackID]];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.connectCallbackID];
 }
 
 #pragma mark Tapjoy Video Ads Delegate Methods
@@ -414,7 +414,7 @@
 	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                                       messageAsString:stringToReturn];
 	
-	[self writeJavascript:[pluginResult toSuccessCallbackString:self.videoAdDelegateCallbackID]];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.videoAdDelegateCallbackID];
 }
 
 
@@ -425,7 +425,7 @@
 	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                                       messageAsString:stringToReturn];
 	
-	[self writeJavascript:[pluginResult toSuccessCallbackString:self.videoAdDelegateCallbackID]];
+	[self.commandDelegate sendPluginResult:pluginResult callbackId:self.videoAdDelegateCallbackID];
 }
 
 - (void)videoAdError:(NSString *)errorMsg
@@ -435,7 +435,7 @@
 	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                                       messageAsString:stringToReturn];
 	
-	[self writeJavascript:[pluginResult toErrorCallbackString:self.videoAdDelegateCallbackID]];
+	[self.commandDelegate sendPluginResult:pluginResult callbackId:self.videoAdDelegateCallbackID];
 }
 
 
@@ -450,7 +450,7 @@
 	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                                       messageAsString:stringToReturn];
 	
-	[self writeJavascript:[pluginResult toSuccessCallbackString:self.displayAdCallbackID]];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.displayAdCallbackID];
 }
 
 
@@ -461,7 +461,7 @@
 	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                                       messageAsString:stringToReturn];
 	
-	[self writeJavascript:[pluginResult toErrorCallbackString:self.displayAdCallbackID]];
+	[self.commandDelegate sendPluginResult:pluginResult callbackId:self.displayAdCallbackID];
 }
 
 
@@ -558,6 +558,14 @@
 	}
 }
 
+/**
+ * Debug plugin JavaScript calls
+ */
+- (void)writeTapjoyJavaScript:(NSString *)jsString
+{
+    [self.commandDelegate evalJs:jsString];
+}
+
 #pragma mark - Tapjoy Static Event Delegate Methods
 
 - (void)sendEventComplete:(NSString *)guid withContent:(BOOL)contentIsAvailable
@@ -565,12 +573,12 @@
 	if (contentIsAvailable)
     {
         NSString *jsCall = [NSString stringWithFormat: @"Tapjoy.sendEventCompleteWithContent('%@');", guid];
-        [self writeJavascript:jsCall];
+        [self writeTapjoyJavaScript:jsCall];
     }
 	else
     {
         NSString *jsCall = [NSString stringWithFormat: @"Tapjoy.sendEventComplete('%@');", guid];
-        [self writeJavascript:jsCall];
+        [self writeTapjoyJavaScript:jsCall];
     } 
 	
 }
@@ -578,19 +586,19 @@
 - (void)sendEventFail:(NSString *)guid error:(NSError*)error
 {
     NSString *jsCall = [NSString stringWithFormat: @"Tapjoy.sendEventFail('%@');", guid];
-    [self writeJavascript:jsCall];
+    [self writeTapjoyJavaScript:jsCall];
 }
 
 - (void)contentDidAppear:(NSString *)guid
 {
 	NSString *jsCall = [NSString stringWithFormat: @"Tapjoy.eventContentDidAppear('%@');", guid];
-    [self writeJavascript:jsCall];
+    [self writeTapjoyJavaScript:jsCall];
 }
 
 - (void)contentDidDisappear:(NSString *)guid
 {
 	NSString *jsCall = [NSString stringWithFormat: @"Tapjoy.eventContentDidDisappear('%@');", guid];
-    [self writeJavascript:jsCall];
+    [self writeTapjoyJavaScript:jsCall];
 }
 
 - (void)event:(NSString *)guid didRequestAction:(TJEventRequest*)request
@@ -601,7 +609,7 @@
 	[_eventRequestDict setObject:request forKey:guid];
 	
 	NSString *jsCall = [NSString stringWithFormat: @"Tapjoy.eventDidRequestAction('%@', '%u', '%@', '%d');", guid, request.type, request.identifier, request.quantity];
-    [self writeJavascript:jsCall];
+    [self writeTapjoyJavaScript:jsCall];
 }
 
 // event callbacks unused by plugins
