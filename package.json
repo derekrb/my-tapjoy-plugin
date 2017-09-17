@@ -1,13 +1,16 @@
 {
+    "name": "My Cordova Tapjoy Plugin",
     "version": "1.5.0",
-    "name": "com.optiqal.myTapjoyPlugin",
-    "cordova_name": "My Cordova Tapjoy Plugin",
+    "cordova_name": "",
     "description": "Cordova Tapjoy plugin",
+    "cordova": {
+        "id": "com.optiqal.myTapjoyPlugin",
+        "platforms": [
+          "ios",
+          "android"
+        ]
+    },
     "license": "GPLv2",
-    "platforms": [
-      "ios",
-      "android"
-    ],
     "repository": {
       "type": "git",
       "url": "git+https://github.com/Switch168/my-tapjoy-plugin"
