@@ -1,6 +1,6 @@
 {
   "version": "1.5.0",
-  "name": "com.optiqal.myTapjoyPlugin",
+  "name": "com.derekrb.myTapjoyPlugin",
   "cordova_name": "My Cordova Tapjoy Plugin",
   "description": "Cordova Tapjoy plugin",
   "license": "GPLv2",
@@ -9,7 +9,7 @@
     "android"
   ],
   "cordova": {
-    "id": "com.optiqal.myTapjoyPlugin",
+    "id": "com.derekrb.myTapjoyPlugin",
     "platforms": [
       "ios",
       "android"
@@ -23,7 +23,7 @@
     ],
     "repository": {
       "type": "git",
-      "url": "git+https://github.com/Switch168/my-tapjoy-plugin.git"
+      "url": "git+https://github.com/derekrb/my-tapjoy-plugin.git"
     },
     "keywords": [
       "ecosystem:cordova",
@@ -34,6 +34,6 @@
     ],
     "author": "Kalpesh Patel",
     "bugs": {
-      "url": "https://github.com/Switch168/my-tapjoy-plugin/issues"
+      "url": "https://github.com/derekrb/my-tapjoy-plugin/issues"
     }
 }
