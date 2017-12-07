@@ -28,12 +28,11 @@ Tapjoy.prototype.MacAddressOptionOff = "2";                     //Completely dis
 /**
  * Initialize Tapjoy Connect
  *
- * @param appID				The Tapjoy App ID.
- * @param secretKey			The Tapjoy Secret Key.
+ * @param sdkKey			The Tapjoy SDK Key.
  * @param successCallback	The success callback
  * @param failureCallback	The error callback
  */
-Tapjoy.prototype.requestTapjoyConnect = function(appID, secretKey, successCallback, failureCallback) {
+Tapjoy.prototype.requestTapjoyConnect = function(sdkKey, successCallback, failureCallback) {
     return cordova.exec(
         successCallback,
         failureCallback,
@@ -45,13 +44,12 @@ Tapjoy.prototype.requestTapjoyConnect = function(appID, secretKey, successCallba
 /**
  * Initialize Tapjoy Connect with flags
  *
- * @param appID				The Tapjoy App ID.
- * @param secretKey			The Tapjoy Secret Key.
+ * @param sdkKey            The Tapjoy SDK Key.
  * @param flags				Tapjoy Connect flags.
  * @param successCallback	The success callback
  * @param failureCallback	The error callback
  */
-Tapjoy.prototype.requestTapjoyConnectWithFlags = function(appID, secretKey, flags, successCallback, failureCallback) {
+Tapjoy.prototype.requestTapjoyConnectWithFlags = function(sdkKey, flags, successCallback, failureCallback) {
     // Populate the hashtable.
     for (var name in flags) {
         cordova.exec(
@@ -207,57 +205,6 @@ Tapjoy.prototype.awardTapPoints = function(amount, successCallback, failureCallb
 
 /**
  * @deprecated Deprecated since version 10.0.0
- * Get a Full Screen Ad.
- *
- * @param successCallback	The success callback
- * @param failureCallback	The error callback
- */
-Tapjoy.prototype.getFullScreenAd = function(successCallback, failureCallback) {
-    return cordova.exec(
-        successCallback,
-        failureCallback,
-        Tapjoy.serviceName,
-        "getFullScreenAd",
-        []);
-};
-
-
-/**
- * @deprecated Deprecated since version 10.0.0
- * Get Full Screen Ad with a currency ID
- *
- * @param currencyID		The Tapjoy currencyID
- * @param successCallback	The success callback
- * @param failureCallback	The error callback
- */
-Tapjoy.prototype.getFullScreenAdWithCurrencyID = function(currencyID, successCallback, failureCallback) {
-    return cordova.exec(
-        successCallback,
-        failureCallback,
-        Tapjoy.serviceName,
-        "getFullScreenAdWithCurrencyID",
-        [currencyID]);
-};
-
-/**
- * @deprecated Deprecated since version 10.0.0
- * Shows the full screen ad.  Call after getting a success from getFullScreenAd(...)
- *
- * @param successCallback	The success callback
- * @param failureCallback	The error callback
- */
-Tapjoy.prototype.showFullScreenAd = function(successCallback, failureCallback) {
-    return cordova.exec(
-        successCallback,
-        failureCallback,
-        Tapjoy.serviceName,
-        "showFullScreenAd",
-        []);
-};
-
-
-/**
- * @deprecated Deprecated since version 10.0.0
  * Sets the maximum number of videos to cache on the device.
  *
  * @param count				Number of videos to cache on the device.
@@ -357,100 +304,6 @@ Tapjoy.prototype.sendIAPEvent = function(name, price, quantity, currencyCode, su
 };
 
 
-/**
- * Get Display Ad
- *
- * @param successCallback	The success callback
- * @param failureCallback	The error callback
- */
-Tapjoy.prototype.getDisplayAd = function(successCallback, failureCallback) {
-    return cordova.exec(
-        successCallback,
-        failureCallback,
-        Tapjoy.serviceName,
-        "getDisplayAd",
-        []);
-};
-
-/**
- * Shows the Display Ad. Call after getting a success from getDisplayAd(...)
- *
- * @param successCallback	The success callback
- * @param failureCallback	The error callback
- */
-Tapjoy.prototype.showDisplayAd = function(successCallback, failureCallback) {
-    return cordova.exec(
-        successCallback,
-        failureCallback,
-        Tapjoy.serviceName,
-        "showDisplayAd",
-        []);
-};
-
-/**
- * Hides the Display Ad
- *
- * @param successCallback	The success callback
- * @param failureCallback	The error callback
- */
-Tapjoy.prototype.hideDisplayAd = function(successCallback, failureCallback) {
-    return cordova.exec(
-        successCallback,
-        failureCallback,
-        Tapjoy.serviceName,
-        "hideDisplayAd",
-        []);
-};
-
-/**
- * Enable auto-refresh of the display ad
- *
- * @param enable            Boolean to enable or disable auto-refresh
- * @param successCallback	The success callback
- * @param failureCallback	The error callback
- */
-Tapjoy.prototype.enableDisplayAdAutoRefresh = function(enable, successCallback, failureCallback) {
-    return cordova.exec(
-        successCallback,
-        failureCallback,
-        Tapjoy.serviceName,
-        "enableDisplayAdAutoRefresh",
-        [enable]);
-};
-
-/**
- * Moves the location of the display ad
- *
- * @param x                 The x coordinate
- * @param y                 The y coordinate
- * @param successCallback	The success callback
- * @param failureCallback	The error callback
- */
-Tapjoy.prototype.moveDisplayAd = function(x, y, successCallback, failureCallback) {
-    return cordova.exec(
-        successCallback,
-        failureCallback,
-        Tapjoy.serviceName,
-        "moveDisplayAd",
-        [x, y]);
-};
-
-/**
- * Sets the Display ad size. Size value must be one of Tapjoy.TJC_DISPLAY_AD_SIZE_320X50, Tapjoy.TJC_DISPLAY_AD_SIZE_640X100, or Tapjoy.TJC_DISPLAY_AD_SIZE_768X90
- *
- * @param size              Display ad size
- * @param successCallback	The success callback
- * @param failureCallback	The error callback
- */
-Tapjoy.prototype.setDisplayAdSize= function(size, successCallback, failureCallback) {
-    return cordova.exec(
-        successCallback,
-        failureCallback,
-        Tapjoy.serviceName,
-        "setDisplayAdSize",
-        [size]);
-};
-
 ///// Tapjoy Events Framework implementation
 
 Tapjoy.sendEventCompleteWithContent = function(guid) {
@@ -488,41 +341,6 @@ Tapjoy.eventDidRequestAction = function(guid, type, identifier, quantity) {
     if(guid in Tapjoy.eventDict){
         Tapjoy.eventDict[guid].triggerDidRequestAction(type, identifier, quantity);
     }
-};
-
-Tapjoy.sendEvent = function(guid) {
-    var responseFunction = function(r){
-
-    }
-    return cordova.exec(
-        responseFunction,
-        responseFunction,
-        Tapjoy.serviceName,
-        "sendEvent",
-        [guid]);
-};
-Tapjoy.showEvent = function(guid) {
-    var responseFunction = function(r){
-
-    }
-    return cordova.exec(
-        responseFunction,
-        responseFunction,
-        Tapjoy.serviceName,
-        "showEvent",
-        [guid]);
-};
-
-Tapjoy.enableEventAutoPresent = function(guid, autoPresent) {
-    var responseFunction = function(r){
-
-    }
-    return cordova.exec(
-        responseFunction,
-        responseFunction,
-        Tapjoy.serviceName,
-        "enableEventAutoPresent",
-        [guid, autoPresent]);
 };
 
 Tapjoy.createEvent = function(tjEvent, eventName, eventParameter) {
