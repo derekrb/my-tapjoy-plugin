@@ -38,7 +38,7 @@ Tapjoy.prototype.requestTapjoyConnect = function(sdkKey, successCallback, failur
         failureCallback,
         Tapjoy.serviceName,
         "requestTapjoyConnect",
-        [appID, secretKey]);
+        [sdkKey]);
 };
 
 /**
@@ -65,7 +65,7 @@ Tapjoy.prototype.requestTapjoyConnectWithFlags = function(sdkKey, flags, success
         failureCallback,
         Tapjoy.serviceName,
         "requestTapjoyConnect",
-        [appID, secretKey]);
+        [sdkKey]);
 };
 
 /**

@@ -27,6 +27,7 @@ import com.tapjoy.TapjoyLog;
 import com.tapjoy.TJGetCurrencyBalanceListener;
 import com.tapjoy.TJSpendCurrencyListener;
 import com.tapjoy.TJVideoListener;
+import com.tapjoy.TJActionRequest;
 
 
 
@@ -227,16 +228,7 @@ public class TapjoyPlugin extends CordovaPlugin implements TJPlacementListener
 		{
 			Log.d("Tapjoy Plugin", "exception: "+ e.toString());
 			result = false;
-			
-			// requestTapjoyConnect has not been called yet.
-			if (com.tapjoy.Tapjoy == null)
-			{
-				callbackContext.error("Tapjoy instance is null.  Call requestTapjoyConnect first");
-			}
-			else
-			{
-				callbackContext.error(e.toString());
-			}
+			callbackContext.error(e.toString());
 		}
 		
 		Log.d("Tapjoy Plugin", "result status: " + result);
@@ -307,38 +299,41 @@ public class TapjoyPlugin extends CordovaPlugin implements TJPlacementListener
 
 	//----------------------------------------------------------------------
 	// EVENTS Interface
-	//----------------------------------------------------------------------
-	public void sendEventCompleted(TJPlacement event, boolean contentAvailable)
-	{
-		TapjoyLog.i(TAG, "sendEventCompleted - contentAvailable = " + contentAvailable);
-
-		if (contentAvailable)
-			webView.sendJavascript("Tapjoy.sendEventCompleteWithContent('" + guidMap.get(event.getGUID()) + "');");
-		else
-			webView.sendJavascript("Tapjoy.sendEventComplete('" + guidMap.get(event.getGUID()) + "');");
-	}
-	
-	public void sendEventFail(TJPlacement event, TJError error)
+	//----------------------------------------------------------------------	
+	public void onRequestFailure(TJPlacement event, TJError error)
 	{
 		TapjoyLog.i(TAG, "sendEventFail");
 
 		webView.sendJavascript("Tapjoy.sendEventFail('" + guidMap.get(event.getGUID()) + "', '"+ error.message + "');");
 	}
 	
-	public void contentDidShow(TJPlacement event)
+	public void onRequestSuccess(TJPlacement event)
+	{
+	}
+
+	public void onContentShow(TJPlacement event)
 	{
 		TapjoyLog.i(TAG, "contentDidShow");
 		webView.sendJavascript("Tapjoy.eventContentDidAppear('" + guidMap.get(event.getGUID()) + "');");
 	}
 	
-	public void contentDidDisappear(TJPlacement event)
+	public void onContentDismiss(TJPlacement event)
 	{
 		TapjoyLog.i(TAG, "contentDidDisappear");
 		webView.sendJavascript("Tapjoy.eventContentDidDisappear('" + guidMap.get(event.getGUID()) + "');");
 	}
-	public void contentIsReady(TJPlacement event, int status)
+	public void onContentReady(TJPlacement event)
 	{
 	}
+
+	public void onPurchaseRequest(TJPlacement event, TJActionRequest request, String productId)
+	{
+	}
+
+	public void onRewardRequest(TJPlacement event, TJActionRequest request, String itemId, int quantity)
+	{
+	}
+
 	private static String getAndroidGuid(String phoneGapGuid)
 	{
 		String androidGuid = null;
