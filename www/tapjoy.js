@@ -120,40 +120,6 @@ Tapjoy.prototype.actionComplete = function(actionID, successCallback, failureCal
 
 
 /**
- * Show Marketplace
- *
- * @param successCallback	The success callback
- * @param failureCallback	The error callback
- */
-Tapjoy.prototype.showOffers = function(successCallback, failureCallback) {
-    return cordova.exec(
-        successCallback,
-        failureCallback,
-        Tapjoy.serviceName,
-        "showOffers",
-        []);
-};
-
-
-/**
- * Show Marketplace with a currency ID
- *
- * @param currencyID		The Tapjoy currency ID
- * @param selector			Whether to show the currency selector or not
- * @param successCallback	The success callback
- * @param failureCallback	The error callback
- */
-Tapjoy.prototype.showOffersWithCurrencyID = function(currencyID, selector, successCallback, failureCallback) {
-    return cordova.exec(
-        successCallback,
-        failureCallback,
-        Tapjoy.serviceName,
-        "showOffersWithCurrencyID",
-        [currencyID, selector]);
-};
-
-
-/**
  * Get Tap Points
  *
  * @param successCallback	The success callback
@@ -204,40 +170,6 @@ Tapjoy.prototype.awardTapPoints = function(amount, successCallback, failureCallb
 
 
 /**
- * @deprecated Deprecated since version 10.0.0
- * Sets the maximum number of videos to cache on the device.
- *
- * @param count				Number of videos to cache on the device.
- * @param successCallback	The success callback
- * @param failureCallback	The error callback
- */
-Tapjoy.prototype.setVideoCacheCount = function(count, successCallback, failureCallback) {
-    return cordova.exec(
-        successCallback,
-        failureCallback,
-        Tapjoy.serviceName,
-        "setVideoCacheCount",
-        [count]);
-};
-
-
-/**
- * @deprecated Deprecated since version 10.0.0
- * Start caching videos (if allowed)
- *
- * @param successCallback	The success callback
- * @param failureCallback	The error callback
- */
-Tapjoy.prototype.cacheVideos = function(successCallback, failureCallback) {
-    return cordova.exec(
-        successCallback,
-        failureCallback,
-        Tapjoy.serviceName,
-        "cacheVideos",
-        []);
-};
-
-/**
  * Sets the video notifier
  *
  * @param successCallback	The success callback
@@ -284,26 +216,6 @@ Tapjoy.prototype.sendShutDownEvent = function(successCallback, failureCallback) 
 };
 
 
-/**
- * Sends IAP event.
- *
- * @param name				Item name.
- * @param price				Item price (real life currency).
- * @param quantity			Quantity of the item purchased.
- * @param currencyCode		Real life currency code purchase was made in.
- * @param successCallback	The success callback
- * @param failureCallback	The error callback
- */
-Tapjoy.prototype.sendIAPEvent = function(name, price, quantity, currencyCode, successCallback, failureCallback) {
-    return cordova.exec(
-        successCallback,
-        failureCallback,
-        Tapjoy.serviceName,
-        "sendIAPEvent",
-        [name, price, quantity, currencyCode]);
-};
-
-
 ///// Tapjoy Events Framework implementation
 
 Tapjoy.sendEventCompleteWithContent = function(guid) {
@@ -334,12 +246,6 @@ Tapjoy.eventContentDidAppear = function(guid) {
 Tapjoy.eventContentDidDisappear = function(guid) {
     if(guid in Tapjoy.eventDict){
         Tapjoy.eventDict[guid].triggerContentDidDisappear();
-    }
-};
-
-Tapjoy.eventDidRequestAction = function(guid, type, identifier, quantity) {
-    if(guid in Tapjoy.eventDict){
-        Tapjoy.eventDict[guid].triggerDidRequestAction(type, identifier, quantity);
     }
 };
 

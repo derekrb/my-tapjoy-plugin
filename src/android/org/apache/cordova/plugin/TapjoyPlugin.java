@@ -72,7 +72,7 @@ public class TapjoyPlugin extends CordovaPlugin implements TJPlacementListener
 			{
 				final String sdkKey = data.getString(0);
 				
-				com.tapjoy.TapjoyConnect.connect(cordova.getActivity().getApplicationContext(), sdkKey, connectFlags, new TJConnectListener()
+				com.tapjoy.Tapjoy.connect(cordova.getActivity().getApplicationContext(), sdkKey, connectFlags, new TJConnectListener()
 				{
 					@Override
 					public void onConnectFailure(){
@@ -87,13 +87,7 @@ public class TapjoyPlugin extends CordovaPlugin implements TJPlacementListener
 			else
 			if (action.equals("setUserID"))
 			{
-				com.tapjoy.TapjoyConnect.getTapjoyConnectInstance().setUserID(data.getString(0));
-				callbackContext.success();
-			}
-			else
-			if (action.equals("enablePaidAppWithActionID"))
-			{
-				com.tapjoy.TapjoyConnect.getTapjoyConnectInstance().enablePaidAppWithActionID(data.getString(0));
+				com.tapjoy.Tapjoy.setUserID(data.getString(0));
 				callbackContext.success();
 			}
 			//--------------------------------------------------------------------------------
@@ -102,28 +96,16 @@ public class TapjoyPlugin extends CordovaPlugin implements TJPlacementListener
 			else
 			if (action.equals("actionComplete"))
 			{
-				com.tapjoy.TapjoyConnect.getTapjoyConnectInstance().actionComplete(data.getString(0));
+				com.tapjoy.Tapjoy.actionComplete(data.getString(0));
 				callbackContext.success();
 			}
 			//--------------------------------------------------------------------------------
 			// OFFERS RELATED
 			//--------------------------------------------------------------------------------
 			else
-			if (action.equals("showOffers"))
-			{
-				com.tapjoy.TapjoyConnect.getTapjoyConnectInstance().showOffers();
-				callbackContext.success();
-			}
-			else
-			if (action.equals("showOffersWithCurrencyID"))
-			{
-				com.tapjoy.TapjoyConnect.getTapjoyConnectInstance().showOffersWithCurrencyID(data.getString(0), data.getBoolean(1));
-				callbackContext.success();
-			}
-			else
 			if (action.equals("getTapPoints"))
 			{
-				com.tapjoy.TapjoyConnect.getTapjoyConnectInstance().getTapPoints(new TJGetCurrencyBalanceListener()
+				com.tapjoy.Tapjoy.getCurrencyBalance(new TJGetCurrencyBalanceListener()
 				{
 					@Override
 					public void onGetCurrencyBalanceResponseFailure(String error)
@@ -141,7 +123,7 @@ public class TapjoyPlugin extends CordovaPlugin implements TJPlacementListener
 			else
 			if (action.equals("spendTapPoints"))
 			{
-				com.tapjoy.TapjoyConnect.getTapjoyConnectInstance().spendTapPoints(data.getInt(0), new TJSpendCurrencyListener()
+				com.tapjoy.Tapjoy.spendCurrency(data.getInt(0), new TJSpendCurrencyListener()
 				{
 					@Override
 					public void onSpendCurrencyResponseFailure(String error)
@@ -159,7 +141,7 @@ public class TapjoyPlugin extends CordovaPlugin implements TJPlacementListener
 			else
 			if (action.equals("awardTapPoints"))
 			{
-				com.tapjoy.TapjoyConnect.getTapjoyConnectInstance().awardTapPoints(data.getInt(0), new TJAwardCurrencyListener()
+				com.tapjoy.Tapjoy.awardCurrency(data.getInt(0), new TJAwardCurrencyListener()
 				{					
 					@Override
 					public void onAwardCurrencyResponseFailure(String error)
@@ -178,21 +160,9 @@ public class TapjoyPlugin extends CordovaPlugin implements TJPlacementListener
 			// VIDEO RELATED
 			//--------------------------------------------------------------------------------
 			else
-			if (action.equals("setVideoCacheCount"))
-			{
-				com.tapjoy.TapjoyConnect.getTapjoyConnectInstance().setVideoCacheCount(data.getInt(0));
-				callbackContext.success();
-			}
-			else
-			if (action.equals("cacheVideos"))
-			{
-				com.tapjoy.TapjoyConnect.getTapjoyConnectInstance().cacheVideos();
-				callbackContext.success();
-			}
-			else
 			if (action.equals("setVideoNotifier"))
 			{
-				com.tapjoy.TapjoyConnect.getTapjoyConnectInstance().setVideoNotifier(new TJVideoListener()
+				com.tapjoy.Tapjoy.setVideoListener(new TJVideoListener()
 				{
 					
 					@Override
@@ -246,16 +216,6 @@ public class TapjoyPlugin extends CordovaPlugin implements TJPlacementListener
 		            }
 		        });
 			}
-			else
-			if (action.equals("sendIAPEvent"))
-			{
-				String name = data.getString(0);
-				float price = (float)data.getDouble(1);
-				int quantity = data.getInt(2);
-				String currencyCode = data.getString(3);
-				
-				com.tapjoy.TapjoyConnect.getTapjoyConnectInstance().sendIAPEvent(name, price, quantity, currencyCode);
-			}
 			//--------------------------------------------------------------------------------
 			//--------------------------------------------------------------------------------
 			else 
@@ -269,7 +229,7 @@ public class TapjoyPlugin extends CordovaPlugin implements TJPlacementListener
 			result = false;
 			
 			// requestTapjoyConnect has not been called yet.
-			if (com.tapjoy.TapjoyConnect.getTapjoyConnectInstance() == null)
+			if (com.tapjoy.Tapjoy == null)
 			{
 				callbackContext.error("Tapjoy instance is null.  Call requestTapjoyConnect first");
 			}
@@ -379,19 +339,6 @@ public class TapjoyPlugin extends CordovaPlugin implements TJPlacementListener
 	public void contentIsReady(TJPlacement event, int status)
 	{
 	}
-	public void didRequestAction(TJPlacement event, TJPlacementRequest request)
-	{
-		TapjoyLog.i(TAG, "didRequestAction");
-
-		String guid = guidMap.get(event.getGUID());
-		if(eventRequestMap == null)
-			eventRequestMap = new Hashtable<String, TJPlacementRequest>();
-
-		eventRequestMap.put(guid, request);
-
-		webView.sendJavascript("Tapjoy.eventDidRequestAction('" + guid + "', '" +  request.type + "', '" + request.identifier + "', '" + request.quantity + "');");
-	}
-	
 	private static String getAndroidGuid(String phoneGapGuid)
 	{
 		String androidGuid = null;
