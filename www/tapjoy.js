@@ -69,6 +69,22 @@ Tapjoy.prototype.requestTapjoyConnectWithFlags = function(sdkKey, flags, success
 };
 
 /**
+ * Enable or disable Tapjoy logging
+ *
+ * @param enable            Whether to enable logging.
+ * @param successCallback   The success callback
+ * @param failureCallback   The error callback
+ */
+Tapjoy.prototype.setDebugEnabled = function(enable, successCallback, failureCallback) {
+    return cordova.exec(
+        successCallback,
+        failureCallback,
+        Tapjoy.serviceName,
+        "setDebugEnabled",
+        [enable]);
+};
+
+/**
  * Sets a userID for this device/account.  This can only be used with non-managed currency and must be called before
  * showing the Marketplace, Display ads, Featured ad, etc.
  *

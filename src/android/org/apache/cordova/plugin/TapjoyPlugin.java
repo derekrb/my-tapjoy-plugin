@@ -91,6 +91,12 @@ public class TapjoyPlugin extends CordovaPlugin implements TJPlacementListener
 				com.tapjoy.Tapjoy.setUserID(data.getString(0));
 				callbackContext.success();
 			}
+			else
+			if (action.equals("setDebugEnabled"))
+			{
+				com.tapjoy.Tajoy.setDebugEnabled(Boolean.parseBoolean(data.getString(0)));
+				callbackContext.success();
+			}
 			//--------------------------------------------------------------------------------
 			// PPA
 			//--------------------------------------------------------------------------------
